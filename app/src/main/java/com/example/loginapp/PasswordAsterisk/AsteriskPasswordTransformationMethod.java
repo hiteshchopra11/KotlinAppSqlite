@@ -1,4 +1,4 @@
-package com.example.loginapp;
+package com.example.loginapp.PasswordAsterisk;
 
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
