@@ -37,7 +37,7 @@ public class Images extends Fragment {
                 i.putExtra("crop", "true");
                 i.putExtra("aspectX", 100);
                 i.putExtra("aspectY", 100);
-                i.putExtra("outputX", 256);
+                i.putExtra("outputX", 356);
                 i.putExtra("outputY", 356);
 
                 try {
