@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Activities.Login">
 
 
     <LinearLayout
@@ -23,7 +23,9 @@
             android:background="@drawable/corner"
             android:gravity="center"
             android:hint="Email"
-            android:maxLines="1"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="2"
             android:padding="16dp"
             android:textSize="30sp" />
 
@@ -36,6 +38,7 @@
             android:background="@drawable/corner"
             android:gravity="center"
             android:hint="Password"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:padding="16dp"
             android:textSize="30sp" />
