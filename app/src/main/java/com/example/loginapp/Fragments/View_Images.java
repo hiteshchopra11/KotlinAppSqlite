@@ -1,10 +1,7 @@
 package com.example.loginapp.Fragments;
 
-import android.content.Intent;
-
 import com.example.loginapp.Model.Images;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,17 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginapp.API.APIClient;
 import com.example.loginapp.API.APIInterface;
 import com.example.loginapp.Adapter.DataAdapter;
 
-import com.example.loginapp.MainActivity;
 import com.example.loginapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
