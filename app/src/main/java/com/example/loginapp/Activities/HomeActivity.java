@@ -1,7 +1,8 @@
-package com.example.loginapp;
+package com.example.loginapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,8 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -21,8 +24,11 @@ import android.widget.Toast;
 
 import com.example.loginapp.Adapter.ViewPagerAdapter;
 import com.example.loginapp.Fragments.Images;
+import com.example.loginapp.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
@@ -31,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     String email;
+    String name;
+    Menu menu;
     // Make sure to be using androidx.appcompat.app.ActionBarDrawerToggle version.
     private ActionBarDrawerToggle drawerToggle;
 
@@ -45,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         nvDrawer = findViewById(R.id.nav_view);
+        menu = nvDrawer.getMenu();
         setSupportActionBar(toolbar);
         // This will display an Up icon (<-), we will replace it with hamburger later
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -66,11 +75,14 @@ public class HomeActivity extends AppCompatActivity {
 
         // Tie DrawerLayout events to the ActionBarToggle
         mDrawer.addDrawerListener(drawerToggle);
-        Intent i = getIntent();
-        Bundle args = i.getBundleExtra("BUNDLE");
-        email = (String) args.getSerializable(("EMAIL"));
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Email address and username
+            email = user.getEmail();
+            menu.findItem(R.id.emailName).setTitle(email);
+        }
     }
+
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
@@ -110,18 +122,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment = null;
         switch (menuItem.getItemId()) {
-            case R.id.account:
-                menuItem.setTitle(email);
+            case R.id.emailName:
+                Toast.makeText(this, email + " is user's email", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.logout:
-                Intent intent = new Intent(HomeActivity.this, Login.class);
-                startActivity(intent);
+                Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 break;
             default:
-
         }
 
 
@@ -140,5 +150,22 @@ public class HomeActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Logging out")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
