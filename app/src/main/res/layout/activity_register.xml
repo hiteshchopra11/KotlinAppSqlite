@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Activities.Register">
 
     <EditText
         android:id="@+id/email"
@@ -16,8 +16,9 @@
         android:background="@drawable/corner"
         android:gravity="center"
         android:hint="Email"
+        android:imeOptions="actionNext"
         android:inputType="textEmailAddress"
-        android:maxLines="1"
+        android:maxLines="2"
         android:padding="16dp"
         android:textSize="30sp" />
 
@@ -28,13 +29,15 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:background="@drawable/corner"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:gravity="center"
         android:hint="Name"
+        android:imeOptions="actionNext"
         android:inputType="textPersonName"
         android:maxLines="1"
         android:padding="16dp"
         android:textSize="30sp" />
+    <!--android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ \n"-->
+
 
     <EditText
         android:id="@+id/password"
@@ -45,6 +48,7 @@
         android:background="@drawable/corner"
         android:gravity="center"
         android:hint="Password"
+        android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:maxLines="1"
         android:padding="16dp"
