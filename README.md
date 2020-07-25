@@ -7,3 +7,6 @@ It uses implicit intents to redirect to email app and phone dialer.Besides this,
 Retrofit,Glide,RecycleView
 
 
+# Link of app
+
+https://github.com/hiteshchopra11/KotlinLoginApp/blob/master/app-release.apk
